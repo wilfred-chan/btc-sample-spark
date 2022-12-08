@@ -1,0 +1,9 @@
+*.class
+*.log
+spark-demo.jar
+
+input/
+input-test/
+target/
+output/
+.idea/
