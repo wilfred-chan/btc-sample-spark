@@ -62,7 +62,30 @@ aws: jar upload-app-aws delete-output-aws
 		--use-default-roles \
 		--enable-debugging \
 		--auto-terminate
-		
+
+# Cluster ID
+aws.cluster.id=j-FPGSMH5SCZLW
+
+# Create EMR Cluster for Spark
+aws-cluster:
+	aws emr create-cluster \
+	--name "CS6240 Ssparkpark Cluster" \
+	--log-uri s3://${aws.bucket.name}/log \
+	--release-label ${aws.emr.release} \
+	--applications Name="Spark" \
+	--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
+	--use-default-roles
+
+# Add A Spark Step
+aws-step: jar upload-app-aws delete-output-aws
+	aws emr add-steps \
+	--cluster-id ${aws.cluster.id}  \
+	--steps Type=CUSTOM_JAR,Name="${app.name}",Jar="command-runner.jar",ActionOnFailure=CONTINUE,Args=["spark-submit","--deploy-mode","cluster","--class","${job.name}","s3://${aws.bucket.name}/${jar.name}","s3://${aws.bucket.name}/${aws.input}","s3://${aws.bucket.name}/${aws.output}"]
+
+# end EMR Cluster
+aws-end-cluster:
+	aws emr terminate-clusters --cluster-ids ${aws.cluster.id}
+
 # Download output from S3.
 download-output-aws: clean-local-output
 	mkdir ${local.output}
