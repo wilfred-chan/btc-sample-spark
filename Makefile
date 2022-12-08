@@ -2,10 +2,10 @@
 
 # Customize these paths for your environment.
 # -----------------------------------------------------------
-app.name=Word Count
+app.name=Extract Parquet
 jar.name=spark-demo.jar
 maven.jar.name=spark-demo-1.0.jar
-job.name=wc.WordCountMain
+job.name=sample.Extract
 local.master=local[4]
 local.input=input
 local.output=output
@@ -64,12 +64,12 @@ aws: jar upload-app-aws delete-output-aws
 		--auto-terminate
 
 # Cluster ID
-aws.cluster.id=j-FPGSMH5SCZLW
+aws.cluster.id=j-1UPW9WEEZCC7I
 
 # Create EMR Cluster for Spark
 aws-cluster:
 	aws emr create-cluster \
-	--name "CS6240 Ssparkpark Cluster" \
+	--name "CS6240 Spark Cluster" \
 	--log-uri s3://${aws.bucket.name}/log \
 	--release-label ${aws.emr.release} \
 	--applications Name="Spark" \
