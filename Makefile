@@ -17,6 +17,7 @@ aws.output=output
 aws.log.dir=log
 aws.num.nodes=1
 aws.instance.type=m1.large
+# All Available Instances: https://aws.amazon.com/ec2/previous-generation/
 # -----------------------------------------------------------
 
 # Compiles code and builds jar (with dependencies).
