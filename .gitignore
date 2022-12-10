@@ -5,5 +5,5 @@ spark-demo.jar
 input/
 input-test/
 target/
-output/
+explode-output/
 .idea/

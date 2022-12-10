@@ -5,7 +5,9 @@
 app.name=Extract Parquet
 jar.name=spark-demo.jar
 maven.jar.name=spark-demo-1.0.jar
-job.name=sample.Extract
+job.name=graph.GraphMain
+# job.name=sample.Extract
+# job.name=json.outputJson
 local.master=local[4]
 local.input=input
 local.output=output
@@ -15,8 +17,8 @@ aws.bucket.name=zhenyu-chen-cs6240
 aws.input=input
 aws.output=output
 aws.log.dir=log
-aws.num.nodes=1
-aws.instance.type=m1.large
+aws.num.nodes=4
+aws.instance.type=m3.xlarge
 # All Available Instances: https://aws.amazon.com/ec2/previous-generation/
 # -----------------------------------------------------------
 
@@ -64,7 +66,7 @@ aws: jar upload-app-aws delete-output-aws
 		--auto-terminate
 
 # Cluster ID
-aws.cluster.id=j-1UPW9WEEZCC7I
+aws.cluster.id=j-1M9Q574NRI503
 
 # Create EMR Cluster for Spark
 aws-cluster:
